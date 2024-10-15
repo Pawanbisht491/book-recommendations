@@ -1,5 +1,5 @@
-function BookCard({ book }) {
-    const { title, authors, description, imageLinks } = book.volumeInfo;
+function BookCard({ book, toggleFavorite, isFavorite }) {
+    const { title, authors, description, imageLinks, infoLink } = book.volumeInfo;
   
     return (
       <div className="book-card">
@@ -14,6 +14,14 @@ function BookCard({ book }) {
           <p className="book-description">
             {description ? description.substring(0, 120) + '...' : 'No description available.'}
           </p>
+          <div className="book-actions">
+            <button onClick={() => window.open(infoLink, '_blank')}>
+              📖 Read More
+            </button>
+            <button onClick={() => toggleFavorite(book)}>
+              {isFavorite ? '💖 Remove Favorite' : '🤍 Add Favorite'}
+            </button>
+          </div>
         </div>
       </div>
     );
